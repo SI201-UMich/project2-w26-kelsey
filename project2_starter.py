@@ -29,8 +29,10 @@ If you are getting "encoding errors" while trying to open, read, or write from a
 
 def load_listing_results(html_path) -> list[tuple]:
     """
-    Load file data from html_path and parse through it to find listing titles and listing ids.
+    Shivani
 
+    Load file data from html_path and parse through it to find listing titles and listing ids.
+    
     Args:
         html_path (str): The path to the HTML file containing the search results
 
@@ -49,8 +51,10 @@ def load_listing_results(html_path) -> list[tuple]:
 
 def get_listing_details(listing_id) -> dict:
     """
-    Parse through listing_<id>.html to extract listing details.
+    Mariah
 
+    Parse through listing_<id>.html to extract listing details.
+    
     Args:
         listing_id (str): The listing id of the Airbnb listing
 
@@ -78,8 +82,10 @@ def get_listing_details(listing_id) -> dict:
 
 def create_listing_database(html_path) -> list[tuple]:
     """
-    Use prior functions to gather all necessary information and create a database of listings.
+    Mariah
 
+    Use prior functions to gather all necessary information and create a database of listings.
+    
     Args:
         html_path (str): The path to the HTML file containing the search results
 
@@ -99,6 +105,8 @@ def create_listing_database(html_path) -> list[tuple]:
 
 def output_csv(data, filename) -> None:
     """
+    Kelsey
+
     Write data to a CSV file with the provided filename.
 
     Sort by Location Rating (descending).
@@ -122,6 +130,8 @@ def output_csv(data, filename) -> None:
 
 def avg_location_rating_by_room_type(data) -> dict:
     """
+    Kelsey
+
     Calculate the average location_rating for each room_type.
 
     Excludes rows where location_rating == 0.0 (meaning the rating
@@ -145,6 +155,8 @@ def avg_location_rating_by_room_type(data) -> dict:
 
 def validate_policy_numbers(data) -> list[str]:
     """
+    Kelsey
+
     Validate policy_number format for each listing in data.
     Ignore "Pending" and "Exempt" listings.
 
@@ -167,6 +179,8 @@ def validate_policy_numbers(data) -> list[str]:
 # EXTRA CREDIT
 def google_scholar_searcher(query):
     """
+    Shivani
+
     EXTRA CREDIT
 
     Args:
@@ -193,12 +207,16 @@ class TestCases(unittest.TestCase):
         self.detailed_data = create_listing_database(self.search_results_path)
 
     def test_load_listing_results(self):
+        # Shivani
+
         # TODO: Check that the number of listings extracted is 18.
         # TODO: Check that the FIRST (title, id) tuple is  ("Loft in Mission District", "1944564").
         pass
 
     def test_get_listing_details(self):
         html_list = ["467507", "1550913", "1944564", "4614763", "6092596"]
+
+        # Mariah
 
         # TODO: Call get_listing_details() on each listing id above and save results in a list.
 
@@ -209,6 +227,8 @@ class TestCases(unittest.TestCase):
         pass
 
     def test_create_listing_database(self):
+        # Mariah
+
         # TODO: Check that each tuple in detailed_data has exactly 7 elements:
         # (listing_title, listing_id, policy_number, host_type, host_name, room_type, location_rating)
 
@@ -217,6 +237,7 @@ class TestCases(unittest.TestCase):
 
     def test_output_csv(self):
         out_path = os.path.join(self.base_dir, "test.csv")
+        #Shivani
 
         # TODO: Call output_csv() to write the detailed_data to a CSV file.
         # TODO: Read the CSV back in and store rows in a list.
@@ -225,11 +246,15 @@ class TestCases(unittest.TestCase):
         os.remove(out_path)
 
     def test_avg_location_rating_by_room_type(self):
+        #Kelsey
+
         # TODO: Call avg_location_rating_by_room_type() and save the output.
         # TODO: Check that the average for "Private Room" is 4.9.
         pass
 
     def test_validate_policy_numbers(self):
+        #Kelsey
+        
         # TODO: Call validate_policy_numbers() on detailed_data and save the result into a variable invalid_listings.
         # TODO: Check that the list contains exactly "16204265" for this dataset.
         pass
