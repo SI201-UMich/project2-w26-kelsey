@@ -48,7 +48,6 @@ def load_listing_results(html_path) -> list[tuple]:
     f.close()
     soup = BeautifulSoup(html, 'html.parser')
     tags = soup.find_all('a')
-
     collect_info = []
     for tag in tags:
         link = tag.get('href')
@@ -208,7 +207,15 @@ def google_scholar_searcher(query):
     # ==============================
     # YOUR CODE STARTS HERE
     # ==============================
-    pass
+    url = "https://scholar.google.com/scholar?q=" + query
+    r = requests.get(url)
+    soup = BeautifulSoup(r.content, 'html.parser')
+    tags = soup.find_all('h3')
+    collect_info = []
+    for tag in tags:
+        info = tag.text
+        collect_info.append(info)
+    return collect_info
     # ==============================
     # YOUR CODE ENDS HERE
     # ==============================
@@ -227,7 +234,7 @@ class TestCases(unittest.TestCase):
 
         # TODO: Check that the number of listings extracted is 18.
         # TODO: Check that the FIRST (title, id) tuple is  ("Loft in Mission District", "1944564").
-        results = load_listing_results("search_results.html")
+        results = load_listing_results(self.search_results_path)
         self.assertEqual(len(results), 18)
         self.assertEqual(results[0], ("Loft in Mission District", "1944564"))
 
@@ -260,6 +267,12 @@ class TestCases(unittest.TestCase):
         # TODO: Call output_csv() to write the detailed_data to a CSV file.
         # TODO: Read the CSV back in and store rows in a list.
         # TODO: Check that the first data row matches ["Guesthouse in San Francisco", "49591060", "STR-0000253", "Superhost", "Ingrid", "Entire Room", "5.0"].
+        output_csv(self.detailed_data, out_path)
+        with open(out_path, encoding="utf-8-sig") as f:
+            reader = csv.reader(f)
+            rows = list(reader)
+        self.assertEqual(rows[1], ["Guesthouse in San Francisco", "49591060", "STR-0000253", "Superhost", "Ingrid", "Entire Room", "5.0"])
+
 
         os.remove(out_path)
 
