@@ -51,13 +51,15 @@ def load_listing_results(html_path) -> list[tuple]:
     collect_info = []
     for tag in tags:
         link = tag.get('href')
-        if link and '/rooms/' in link:
-            match = re.search(r'/rooms/(\d+)', link)
-            if match:
-                listing_id = match.group(1)
-                info = tag.text.strip()
-                if info != '':
-                    collect_info.append((info, listing_id))
+        if link != None and '/rooms/' in link:
+            parts = link.split('/rooms/')
+            listing_id = parts[1].split('?')[0]
+            title_id = tag.get('aria-labelledby')
+            if title_id != None:
+                title_tag = soup.find('div', id=title_id)
+                if title_tag != None:
+                    title = title_tag.text.strip()
+                    collect_info.append((title, listing_id))
     return collect_info
     # ==============================
     # YOUR CODE ENDS HERE
