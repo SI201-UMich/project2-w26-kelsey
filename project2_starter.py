@@ -43,7 +43,23 @@ def load_listing_results(html_path) -> list[tuple]:
     # ==============================
     # YOUR CODE STARTS HERE
     # ==============================
-    pass
+    f = open(html_path, encoding="utf-8-sig")
+    html = f.read()
+    f.close()
+    soup = BeautifulSoup(html, 'html.parser')
+    tags = soup.find_all('a')
+
+    collect_info = []
+    for tag in tags:
+        link = tag.get('href')
+        if link and '/rooms/' in link:
+            match = re.search(r'/rooms/(\d+)', link)
+            if match:
+                listing_id = match.group(1)
+                info = tag.text.strip()
+                if info != '':
+                    collect_info.append((info, listing_id))
+    return collect_info
     # ==============================
     # YOUR CODE ENDS HERE
     # ==============================
@@ -211,7 +227,9 @@ class TestCases(unittest.TestCase):
 
         # TODO: Check that the number of listings extracted is 18.
         # TODO: Check that the FIRST (title, id) tuple is  ("Loft in Mission District", "1944564").
-        pass
+        results = load_listing_results("search_results.html")
+        self.assertEqual(len(results), 18)
+        self.assertEqual(results[0], ("Loft in Mission District", "1944564"))
 
     def test_get_listing_details(self):
         html_list = ["467507", "1550913", "1944564", "4614763", "6092596"]
