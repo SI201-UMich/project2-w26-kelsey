@@ -1,7 +1,7 @@
 # SI 201 HW4 (Library Checkout System)
 # Your name: Shivani Patel, Kelsey Lin, Mariah Cooperwood
-# Your student id: #0399 0808, 
-# Your email: shivapa@umich.edu, 
+# Your student id: #0399 0808, #---, 32843209 
+# Your email: shivapa@umich.edu, --- lanelle@umich.edu
 # Who or what you worked with on this homework (including generative AI like ChatGPT):
 # If you worked with generative AI also add a statement for how you used it.
 # e.g.:
@@ -89,14 +89,80 @@ def get_listing_details(listing_id) -> dict:
             }
         }
     """
-    # TODO: Implement checkout logic following the instructions
-    # ==============================
-    # YOUR CODE STARTS HERE
-    # ==============================
-    pass
-    # ==============================
-    # YOUR CODE ENDS HERE
-    # ==============================
+    #opening and reading in the file. 
+    dir = os.path.abspath(os.path.dirname(__file__))
+    file_path = os.path.join(dir, "html_files", f"listing_{listing_id}.html")
+    
+    with open(file_path, "r", encoding="utf-8") as file:
+        html = file.read()
+        
+    soup = BeautifulSoup(html, "html.parser")
+    text = soup.get_text(" ", strip=True)
+    
+    policy_number = "Pending"
+
+    if "Exempt" in text:
+        policy_number = "Exempt"
+    else:
+        policy_match = re.search(r"(20\d{2}-00\d{4}STR|STR-000\d{4})", text)
+        if policy_match:
+            policy_number = policy_match.group()
+
+    host_type = "regular"
+    if "Superhost" in text:
+        host_type = "Superhost"
+    else:
+        host_type = "regular"
+    host_name = ""
+    room_type = "Entire Room"
+
+    # looking for a heading or div with "hosted by"
+    host_line = ""
+
+    for tag in soup.find_all(["h2", "div"]):
+        if tag.get_text() and "hosted by" in tag.get_text().lower():
+            host_line = tag.get_text(" ", strip=True)
+            break
+
+    if host_line != "":
+        parts = host_line.split("hosted by")
+
+        if len(parts) == 2:
+            listing_subtitle = parts[0].strip()
+            host_name = parts[1].strip()
+
+            if "private" in listing_subtitle.lower():
+                room_type = "Private Room"
+            elif "shared" in listing_subtitle.lower():
+                room_type = "Shared Room"
+            else:
+                room_type = "Entire Room"
+
+   #initializing location_rating as a float. 
+    location_rating = 0.0
+
+    # trying JSON-style pattern and html
+    location_match = re.search(r'"label":"Location","accessibilityLabel":"([0-9.]+) out of 5.0"', html)
+    if location_match:
+        location_rating = float(location_match.group(1))
+    else:
+        location_match = re.search(r'Location.*?aria-label="([0-9.]+) out of 5.0"', html, re.DOTALL)
+        if location_match:
+            location_rating = float(location_match.group(1))
+
+    # returning the nested dictionary 
+    return {
+        listing_id: {
+            "policy_number": policy_number,
+            "host_type": host_type,
+            "host_name": host_name,
+            "room_type": room_type,
+            "location_rating": location_rating
+        }
+    }
+            
+
+    
 
 
 def create_listing_database(html_path) -> list[tuple]:
