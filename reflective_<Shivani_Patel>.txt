@@ -1,0 +1,50 @@
+● Do you think this current system provides adequate accountability around short-term 
+rentals in San Francisco? In your response, describe why you believe the system is 
+adequate or inadequate. If you believe the system is inadequate, discuss a possible 
+change in actions required to improve accountability in this system. You may refer to the 
+SWE Code of Ethics as you think through your response. 
+
+I think this current system provides an adequate accountability around short-term rentals in Sanfrancisco
+because while there's still a lot of room for improvement, it does the basic jobs of making sure the residents
+are registered, linking listings to official policy numbers, and includes a section for complaints. Using business
+licenses and policy numbers, it establishes a legal ground for parties to be held accountable and makes it easier for
+authories to identify violations. The complaint system allows will help people be bale to report and problems in listings, 
+helping the city focus on issues that actually impact the community directly. While it still lacks in areas like more active 
+enforcement or automated monitoring, it meets the basic minimum requirements for accountability, making this adequate. 
+If the question were phrased using verbage like "great" or "perfect", I think my answer would be different, but as far as adequate 
+goes, I would say yes this current system is adequate.
+
+ 
+●  As discussed in the introduction, the legality of web scraping is still uncertain in the US. 
+Skim through the Legal Issues section of Web Scraping in the US on Wikipedia and this 
+article about the legal issues with the Computer Fraud and Abuse Act, and describe at 
+least one factor you believe is important to consider when discussing the legality of web 
+scraping and why. 
+ 
+ One factor I believe is important to consider when discussing the legality of web scraping is if it violates
+ the site's "Terms of Service". Almost everyone has experience opening a new site and getting a lengthy Terms
+ of Service message and usually skipping it to go straight to using the site. Even if this data is pubilicy
+ accessible, scraping it in a way that goes against the Terms of Service can create legal problems because the 
+ site will consider it unauthorized access. This is important because even like analyzing Airbnb listings like
+ in the example, it's important that it still respects the platform's rules. I think after research I found that
+ an alternative can be using API provided data to stay within the legal boundaries. 
+
+●  Scraping public data does not always lead to positive results for society. For example, 
+look  to  Facebook–Cambridge  Analytica  data  scandal  -  Wikipedia  or  Clearview  AI  - 
+Wikipedia. Many argue that using someone’s personal data without their consent (even if 
+publicly provided) is unethical. Web scraping requires thoughtful intervention. Develop at 
+least two guidelines you think are important to consider when deciding whether to do 
+web scraping.  
+ 
+One big guideline I think is important to consider when deciding whether to do web scarping is "Privacy and Consent",
+Like I mentioned before, even if the data is publicly available, there are still terms that need to be respected.
+Web scarping should have boundaries to make sure it does not misuse personal information because as much as that could
+cause legal problems, it can also harm people in an ethical concern. Like in the example mentioned with the Facebook-Facebook–Cambridge
+ Analytica scandal where millions of user's personal data was collected and used without consent to promote targeted advertising
+ for political efforts. This led to a huge loss of trust in social media platforms from this clear violation of privacy. It shows
+ the importance of Privacy and Consent being an important guideline.
+Another guideline I think is important to consider when deciding whether to do web scarping "Responsible Usage." With data collection and
+specifically from the example we saw in the Facebook–Cambridge scandal of the misuse of data in hopes to manipulate the audience, it's very
+important to put an emphasis on using this data respectfully and ethically. Using the data being collected with benefical purposes like research
+in a transparent way could avoid causing harm and mistrust from the audience. This guideline helps ensure the data collection alligns with 
+the publics interest and moral ethical standards.
