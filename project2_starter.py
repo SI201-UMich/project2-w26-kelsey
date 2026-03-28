@@ -131,7 +131,7 @@ def output_csv(data, filename) -> None:
     Args:
         data (list[tuple]): A list of tuples containing listing information
         filename (str): The name of the CSV file to be created and saved to
-
+        "Listing Title" , "Listing ID" , "Policy Number" , "Host Type" "Host , Name" , "Room Type" , "Location Rating"
     Returns:
         None
     """
@@ -139,7 +139,12 @@ def output_csv(data, filename) -> None:
     # ==============================
     # YOUR CODE STARTS HERE
     # ==============================
-    pass
+    sorted_data = sorted(data, key = lambda x: x[6], reverse = True)
+    header = ["Listing Title" , "Listing ID" , "Policy Number" , "Host Type" "Host , Name" , "Room Type" , "Location Rating"]
+    with open(filename, 'w', newlin ='', encoding = 'utf-8-sig') as f:
+        writer = csv.writer(f)
+        writer.writerow(header)
+        writer.writerrows(sorted_data)
     # ==============================
     # YOUR CODE ENDS HERE
     # ==============================
