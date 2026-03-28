@@ -1,0 +1,22 @@
+Question 1 
+
+The current system provides some level of accountability, but it is not fully adequate. By requiring policy numbers and registration there is an evident effort to regulate short-term rentals. However, it seems like the system can be easy to fake or work around, especially when considering listings that are marked as “Pending” or have unclear verification processes. For instance, it is interesting that the requirement is 275 days of residence instead of a stricter standard, because that still leaves room for people to misuse properties for short-term rentals. To improve accountability, there ought to be stricter verification methods to ensure listings are legitimate, along with stronger penalties for those who violate the rules. This aligns more closely with the SWE Code of Ethics by promoting honesty, transparency, and responsibility in how platforms manage and enforce regulations.
+
+
+
+Question 2 
+
+An important factor to consider when discussing the legality of web scraping is if the data being collected is public. Personally, I feel that if data is publicly available, it is generally acceptable to scrape it, since it is already accessible to anyone. However, this does not mean there are no concerns. Even public data can raise issues related to privacy and misuse, especially when large amounts of data are collected and used in ways that were not originally intended. For example, companies or individuals could aggregate data to create profiles or insights that harm users. Because of this, it is important to balance accessibility with the ethical responsibility of deciding whether web scraping is appropriate.
+
+
+
+Question 3
+
+I think one important guideline is to avoid collecting personal or sensitive information, even if it is publicly available, because individuals may not have intended for their data to be used at such scale. Another important guideline is to make sure that the data is only used for positive or ethical purposes, such as research or improving services, rather than manipulation or exploitation. There is still a responsibility to respect the privacy of others and consider the potential consequences of how data is used even if it is free. Following these kinds of guidelines helps ensure that web scraping is done in a way that benefits society rather than causing harm.
+
+
+
+
+
+
+
