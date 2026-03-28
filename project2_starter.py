@@ -14,6 +14,7 @@
 # --- ARGUMENTS & EXPECTED RETURN VALUES PROVIDED --- #
 # --- SEE INSTRUCTIONS FOR FULL DETAILS ON METHOD IMPLEMENTATION --- #
 
+import html
 from bs4 import BeautifulSoup
 import re
 import os
@@ -55,7 +56,9 @@ def load_listing_results(html_path) -> list[tuple]:
         link = tag.get('href')
         if link != None and '/rooms/' in link:
             parts = link.split('/rooms/')
-            listing_id = parts[1].split('?')[0]
+            listing_part = parts[1].split('?')[0]
+            listing_id = listing_part.split('/')[-1]
+
             title_id = tag.get('aria-labelledby')
             if title_id != None:
                 title_tag = soup.find('div', id=title_id)
@@ -89,6 +92,9 @@ def get_listing_details(listing_id) -> dict:
             }
         }
     """
+    
+
+
     #opening and reading in the file. 
     dir = os.path.abspath(os.path.dirname(__file__))
     file_path = os.path.join(dir, "html_files", f"listing_{listing_id}.html")
@@ -104,9 +110,14 @@ def get_listing_details(listing_id) -> dict:
     if "Exempt" in text:
         policy_number = "Exempt"
     else:
-        policy_match = re.search(r"(20\d{2}-00\d{4}STR|STR-000\d{4})", text)
+        policy_match = re.search(r"Policy number:\s*([A-Za-z0-9\-]+)", text)
         if policy_match:
-            policy_number = policy_match.group()
+            policy_number = policy_match.group(1)
+            
+            if policy_number.lower() == "pending":
+                policy_number = "Pending"
+            elif policy_number.lower() == "exempt":
+                policy_number = "Exempt"
 
     host_type = "regular"
     if "Superhost" in text:
@@ -119,13 +130,11 @@ def get_listing_details(listing_id) -> dict:
     # looking for a heading or div with "hosted by"
     host_line = ""
 
-    for tag in soup.find_all(["h2", "div"]):
-        if tag.get_text() and "hosted by" in tag.get_text().lower():
-            host_line = tag.get_text(" ", strip=True)
-            break
+    host_tag = soup.find("h2", string=re.compile("hosted by", re.IGNORECASE))
 
-    if host_line != "":
-        parts = host_line.split("hosted by")
+    if host_tag is not None:
+        host_line = host_tag.get_text(" ", strip=True)
+        parts = re.split(r"hosted by", host_line, flags=re.IGNORECASE)
 
         if len(parts) == 2:
             listing_subtitle = parts[0].strip()
@@ -142,28 +151,14 @@ def get_listing_details(listing_id) -> dict:
     location_rating = 0.0
 
     # trying JSON-style pattern and html
-    location_match = re.search(r'"label":"Location","accessibilityLabel":"([0-9.]+) out of 5.0"', html)
+
+    location_match = re.search(r'Location</div><div class="[^"]*"><div class="[^"]*" aria-label="([0-9.]+) out of 5.0"', html)
+
     if location_match:
         location_rating = float(location_match.group(1))
-    else:
-        location_match = re.search(r'Location.*?aria-label="([0-9.]+) out of 5.0"', html, re.DOTALL)
-        if location_match:
-            location_rating = float(location_match.group(1))
 
-    # returning the nested dictionary 
-    return {
-        listing_id: {
-            "policy_number": policy_number,
-            "host_type": host_type,
-            "host_name": host_name,
-            "room_type": room_type,
-            "location_rating": location_rating
-        }
-    }
-            
-
-    
-
+    # returning the nested dictionary
+    return {listing_id: {"policy_number": policy_number, "host_type": host_type, "host_name": host_name, "room_type": room_type, "location_rating": location_rating}}
 
 def create_listing_database(html_path) -> list[tuple]:
     """
@@ -386,7 +381,7 @@ class TestCases(unittest.TestCase):
         # TODO: Call avg_location_rating_by_room_type() and save the output.
         # TODO: Check that the average for "Private Room" is 4.9.
         ave = avg_location_rating_by_room_type(self.detailed_data)
-        self.assertEqual(ave.get("Private Room", 4.9))
+        self.assertEqual(ave.get("Private Room"), 4.9)
 
     def test_validate_policy_numbers(self):
         #Kelsey
