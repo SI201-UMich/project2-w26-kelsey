@@ -189,30 +189,17 @@ def create_listing_database(html_path) -> list[tuple]:
 
 
 def output_csv(data, filename) -> None:
-    """
-    Kelsey
 
-    Write data to a CSV file with the provided filename.
-
-    Sort by Location Rating (descending).
-
-    Args:
-        data (list[tuple]): A list of tuples containing listing information
-        filename (str): The name of the CSV file to be created and saved to
-        "Listing Title" , "Listing ID" , "Policy Number" , "Host Type" "Host , Name" , "Room Type" , "Location Rating"
-    Returns:
-        None
-    """
-    # TODO: Implement checkout logic following the instructions
-    # ==============================
-    # YOUR CODE STARTS HERE
-    # ==============================
     sorted_data = sorted(data, key = lambda x: x[6], reverse = True)
     header = ["Listing Title" , "Listing ID" , "Policy Number" , "Host Type" "Host , Name" , "Room Type" , "Location Rating"]
-    with open(filename, 'w', newlin ='', encoding = 'utf-8-sig') as f:
+    f = open(filename, 'w', newlin ='', encoding = 'utf-8-sig')
+    try:
         writer = csv.writer(f)
         writer.writerow(header)
         writer.writerrows(sorted_data)
+    finally:
+        f.close()
+        # can you do this part without use with and just use open() and close()? how
     # ==============================
     # YOUR CODE ENDS HERE
     # ==============================
@@ -237,7 +224,16 @@ def avg_location_rating_by_room_type(data) -> dict:
     # ==============================
     # YOUR CODE STARTS HERE
     # ==============================
-    pass
+    room = {}
+    for listing in data:
+        type = listing[5]
+        location = listing[6]
+
+        if location != 0.0:
+            status = room.get(type, [0.0, 0])
+            room[type][0] += location
+            room[type][1] += 1
+            room[type] = status
     # ==============================
     # YOUR CODE ENDS HERE
     # ==============================
