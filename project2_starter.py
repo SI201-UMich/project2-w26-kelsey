@@ -239,8 +239,11 @@ def avg_location_rating_by_room_type(data) -> dict:
             status[0] += location
             status[1] += 1
             room[type] = status
+    averages = {}
     for k,v in room.items():
-        return {k:round(v[0] / v[1], 1)}
+        averages[k] = round(v[0] / v[1], 1)
+
+    return averages
 
 def validate_policy_numbers(data) -> list[str]:
     """
