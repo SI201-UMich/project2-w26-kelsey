@@ -1,7 +1,7 @@
 # SI 201 HW4 (Library Checkout System)
 # Your name: Shivani Patel, Kelsey Lin, Mariah Cooperwood 
-# Your student id: #0399 0808, #---, 32843209 
-# Your email: shivapa@umich.edu, --- lanelle@umich.edu
+# Your student id: #0399 0808, #27215513, 32843209 
+# Your email: shivapa@umich.edu, kelslin@umich.edu, lanelle@umich.edu
 # Who or what you worked with on this homework (including generative AI like ChatGPT):
 # If you worked with generative AI also add a statement for how you used it.
 # e.g.:
