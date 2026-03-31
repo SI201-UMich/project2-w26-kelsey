@@ -1,0 +1,9 @@
+1. 
+The current system provides inadequate accountability around short term rentals in SF because of how the city only investigates listings when there is a complaint received in the system. Based on the SWE code of Ethic, a rule says a SWE should be obligated to disclose any perceived or actual danger to user, public and environment. The danger is not being prevented and is only investigated after the harm has happened. A possible change to deal with this accountability is to have some sort of notes on felony to prevent the platform services from getting facilitated with illegal activities. 
+
+2.
+One factor is to distinguish whether the perceived data was published from the user as public or private data accessed by bypassing technical barriers. User data safety is always number 1 prioritization when we are using web scraping where the information is massive and hard to filter the resource.
+
+3.
+a) An evaluation on the purpose of web scraping to weigh whether its benefit for the users, public or the environment is much bigger than the individual privacy.
+b) Leaving a note when the data is scraped so the user knows someone has looked and referenced their data.
